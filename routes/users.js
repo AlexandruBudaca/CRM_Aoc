@@ -98,4 +98,48 @@ router.get("/logout", auth, (req, res) => {
   });
 });
 
+router.put("/edit/:id", (req, res) => {
+  if (!req.body) {
+    return res.status(400).send({
+      message: "Data to update can not be empty!",
+    });
+  }
+  const id = req.params.id;
+
+  User.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
+    .then((data) => {
+      if (!data) {
+        res.status(404).send({
+          message: `Cannot update user with id=${id}. Maybe Tutorial was not found!`,
+        });
+      } else res.send({ message: "User was updated successfully." });
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: "Error updating user with id=" + id,
+      });
+    });
+});
+router.delete("/delete/:id", (req, res) => {
+  const id = req.params.id;
+
+  User.findByIdAndRemove(id)
+    .then((data) => {
+      if (!data) {
+        res.status(404).send({
+          message: `Cannot delete user with id=${id}. Maybe Tutorial was not found!`,
+        });
+      } else {
+        res.send({
+          message: "User was deleted successfully!",
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: "Could not delete user with id=" + id,
+      });
+    });
+});
+
 module.exports = router;
