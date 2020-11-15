@@ -2,6 +2,9 @@
   "name": "crm-aoc",
   "version": "0.0.0",
   "private": true,
+   "engines": {
+   "node": "12.6.0"
+   },
   "scripts": {
     "start": "nodemon app.js",
     "lint": "eslint routes app.js models"
