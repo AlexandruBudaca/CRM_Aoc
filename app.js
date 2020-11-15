@@ -7,10 +7,11 @@ const dotenv = require("dotenv");
 const bodyParser = require("body-parser");
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
+const cors = require("cors");
 
 dotenv.config();
 const app = express();
-const PORT = 3000;
+const PORT = 8080;
 
 const db = require("./config/keys").mongoURI;
 
@@ -27,7 +28,7 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-
+app.use(cors());
 app.use("/", indexRouter);
 app.use("/", usersRouter);
 
