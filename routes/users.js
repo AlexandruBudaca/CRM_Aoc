@@ -83,7 +83,7 @@ router.post("/login", (req, res) => {
           res
             .cookie("auth", user.token, {
               maxAge: 1000 * 60 * 10,
-              httpOnly: false,
+              httpOnly: true,
             })
             .json({
               isAuth: true,
