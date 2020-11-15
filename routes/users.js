@@ -80,17 +80,16 @@ router.post("/login", (req, res) => {
         const dom = "https://crmaoc.herokuapp.com/";
         user.generateToken((err, user) => {
           if (err) return res.status(400).send(err);
-          res
-            .cookie("auth", user.token, {
-              domain: dom,
-              maxAge: 1000 * 60 * 10,
-              httpOnly: false,
-            })
-            .json({
-              isAuth: true,
-              id: user._id,
-              email: user.email,
-            });
+          res.cookie("auth", user.token, {
+            domain: dom,
+            maxAge: 1000 * 60 * 10,
+            httpOnly: false,
+          });
+          res.status(200).json({
+            isAuth: true,
+            id: user._id,
+            email: user.email,
+          });
         });
       });
     });
