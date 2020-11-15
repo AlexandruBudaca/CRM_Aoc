@@ -11,7 +11,6 @@ const cors = require("cors");
 
 dotenv.config();
 const app = express();
-const PORT = 8080;
 
 const db = require("./config/keys").mongoURI;
 
@@ -49,7 +48,9 @@ app.use((err, req, res) => {
   res.status(err.status || 500);
   res.json("error");
 });
-app.listen(PORT, () => {
+const { PORT } = process.env;
+
+app.listen(PORT || 5000, () => {
   console.log(`Running at https://localhost:${PORT}`);
 });
 
