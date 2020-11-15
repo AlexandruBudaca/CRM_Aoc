@@ -77,7 +77,7 @@ router.post("/login", (req, res) => {
             message: "password doesn't match",
           });
         }
-        const dom = "https://crmaoc.herokuapp.com/";
+        const dom = "localhost";
         user.generateToken((err, user) => {
           if (err) return res.status(400).send(err);
           res.cookie("auth", user.token, {
