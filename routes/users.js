@@ -77,15 +77,9 @@ router.post("/login", (req, res) => {
             message: "password doesn't match",
           });
         }
-        const dom = "localhost";
         user.generateToken((err, user) => {
           if (err) return res.status(400).send(err);
-          res.cookie("auth", user.token, {
-            domain: dom,
-            maxAge: 1000 * 60 * 10,
-            httpOnly: false,
-          });
-          res.status(200).json({
+          res.cookie("auth", user.token).json({
             isAuth: true,
             id: user._id,
             email: user.email,
