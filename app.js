@@ -4,7 +4,6 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
-const bodyParser = require("body-parser");
 const cors = require("cors");
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
@@ -15,7 +14,6 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(bodyParser.json());
 app.use(cors({ credentials: true, origin: true }));
 
 const db = require("./config/keys").mongoURI;
@@ -51,7 +49,7 @@ app.use((err, req, res) => {
 const { PORT } = process.env;
 
 app.listen(PORT || 5000, () => {
-  console.log(`Running at https://localhost:${PORT}`);
+  console.log(`Running at http://localhost:${PORT}`);
 });
 
 module.exports = app;
