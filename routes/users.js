@@ -80,7 +80,7 @@ router.post("/login", (req, res) => {
         user.generateToken((err, user) => {
           if (err) return res.status(400).send(err);
           res
-            .cookie("auth", user.token, { sameSite: "None", secure: true })
+            .cookie("auth", user.token, { SameSite: "None", Secure: true })
             .json({
               isAuth: true,
               id: user._id,
