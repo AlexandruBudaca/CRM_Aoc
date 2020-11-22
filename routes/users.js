@@ -80,11 +80,11 @@ router.post("/login", (req, res) => {
         user.generateToken((err, user) => {
           if (err) return res.status(400).send(err);
           res.cookie("auth", user.token, {
-            httpOnly: true,
+            // httpOnly: true,
             sameSite: "None",
             secure: true,
           });
-          res.json({
+          res.send({
             isAuth: true,
             id: user._id,
             email: user.email,
