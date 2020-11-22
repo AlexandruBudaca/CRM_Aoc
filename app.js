@@ -14,25 +14,16 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(
-  cors({
-    allowedHeaders: [
-      "Origin",
-      "X-Requested-With",
-      "Content-Type",
-      "Accept",
-      "X-Access-Token",
-      "Authorization",
-    ],
-    credentials: true,
-    methods: "GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE",
-    origin: "http://localhost:8080",
-    preflightContinue: false,
-  })
-);
+app.use(cors({ credentials: true, origin: true }));
 
 const db = require("./config/keys").mongoURI;
+const allowCrossDomain = function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "https://dashboaraoc.netlify.app/");
+  res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
+  res.header("Access-Control-Allow-Headers", "Content-Type");
 
+  next();
+};
 mongoose
   .connect(db, {
     useUnifiedTopology: true,
@@ -44,7 +35,7 @@ mongoose
 
 app.use("/", indexRouter);
 app.use("/", usersRouter);
-
+app.use(allowCrossDomain);
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
   next(createError(404));
