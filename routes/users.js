@@ -82,7 +82,7 @@ router.post("/login", (req, res) => {
           res.cookie("auth", user.token, {
             httpOnly: true,
             sameSite: "None",
-            // secure: true,
+            secure: true,
           });
           res.json({
             isAuth: true,
