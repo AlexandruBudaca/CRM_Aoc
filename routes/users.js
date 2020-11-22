@@ -82,10 +82,10 @@ router.post("/login", (req, res) => {
           res
             .cookie("auth", user.token, {
               httpOnly: true,
-              sameSite: "lax",
+              sameSite: "None",
               secure: true,
             })
-            .send({
+            .json({
               isAuth: true,
               id: user._id,
               email: user.email,
