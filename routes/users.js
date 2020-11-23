@@ -83,7 +83,6 @@ router.post("/login", (req, res) => {
             httpOnly: true,
             sameSite: "None",
             secure: true,
-            expires,
           });
           res.send({
             isAuth: true,
