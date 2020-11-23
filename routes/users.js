@@ -81,8 +81,9 @@ router.post("/login", (req, res) => {
           if (err) return res.status(400).send(err);
           res.cookie("auth", user.token, {
             httpOnly: true,
-            // sameSite: "None",
+            sameSite: "None",
             secure: true,
+            expires,
           });
           res.send({
             isAuth: true,
