@@ -74,13 +74,13 @@ router.post("/login", (req, res) => {
         if (!isMatch) {
           return res.json({
             isAuth: false,
-            message: "password doesn't match",
+            message: "password is wrong!",
           });
         }
         user.generateToken((err, user) => {
           if (err) return res.status(400).send(err);
           res.cookie("auth", user.token, {
-            // httpOnly: true,
+            httpOnly: true,
             sameSite: "None",
             secure: true,
           });
