@@ -14,9 +14,7 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(
-  cors({ credentials: true, origin: "https://dashboaraoc.netlify.app/" })
-);
+app.use(cors({ credentials: true, origin: true }));
 
 const db = require("./config/keys").mongoURI;
 
