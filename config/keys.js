@@ -4,5 +4,5 @@ dotenv.config();
 
 module.exports = {
   mongoURI: `mongodb+srv://AlexandruBudaca:${process.env.password}@alex.njtpl.mongodb.net/${process.env.mongoCollection}?retryWrites=true&w=majority`,
-  jwt: process.env.jwtSecret,
+  jwt: `${process.env.jwtSecret}`,
 };
